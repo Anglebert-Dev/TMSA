@@ -1,48 +1,27 @@
-import React from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
+
+import NoMatch from "./components/NoMatch"
+
+import Home from "./pages/Home";
+
 import "./App.css";
 
-
-
-import AddTutorial from "./components/AddTutorial";
-import Tutorial from "./components/Tutorial";
-import TutorialsList from "./components/TutorialsList";
-
-function App() {
-  const styles ={
-    marginLeft:15
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
-  return (
-    <div>
-      <nav className="navbar navbar-expand navbar-dark bg-dark ">
-        <a href="/tutorials" className="navbar-brand styl " style={styles}>
-          Mak.
-        </a>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/tutorials"} className="nav-link">
-              Tutorials
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to={"/add"} className="nav-link">
-              Add Tutorials
-            </Link>
-          </li>
+
+  render() {
+    return (
+        <div id="application">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route component={NoMatch} />
+          </Routes>
         </div>
-      </nav>
 
-      <div className="container mt-3 ">
-        <Routes>
-          <Route path="/" element={<TutorialsList/>} />
-          <Route path="/tutorials" element={<TutorialsList/>} />
-          <Route path="/add" element={<AddTutorial/>} />
-          <Route path="/tutorials/:id" element={<Tutorial/>} />
-        </Routes>
-      </div>
-    </div>
-  );
+    )
+  }
 }
-
-export default App;
